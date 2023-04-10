@@ -6,18 +6,20 @@ const cors = require('cors')
 require('dotenv').config();
 // functionality of the app
 const app = express();
-const allowedOrigins = ['https://brain-rush-f-rgo4-mvin3k6y6-joulqasis.vercel.app'];
-app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
-}));
+app.use(cors()); // Allow all origins
+
+// const allowedOrigins = ['https://brain-rush-f-rgo4-mvin3k6y6-joulqasis.vercel.app'];
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         // allow requests with no origin (like mobile apps or curl requests)
+//         if (!origin) return callback(null, true);
+//         if (allowedOrigins.indexOf(origin) === -1) {
+//             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+//             return callback(new Error(msg), false);
+//         }
+//         return callback(null, true);
+//     }
+// }));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api', router);
