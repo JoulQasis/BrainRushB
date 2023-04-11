@@ -20,6 +20,9 @@ const GameScore = new Schema({
     score: {
         type: String,
     },
+    rounds: {
+        type: String,
+    },
     level: {
         type: Number,
     },

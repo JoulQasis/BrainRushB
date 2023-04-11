@@ -5,22 +5,23 @@ const GameScore = require('../model/GameScore.js')
 
 const updateGameScore = async (req, res) => {
     const id = req.params.id
-    const { score, timer, level } = req.body
+    const { score, timer, level, rounds } = req.body
     let updatedScore;
     try {
 
-        updatedScore = await GameScore.findOneAndUpdate({_id: id, level: level }, {
-            score, 
+        updatedScore = await GameScore.findOneAndUpdate({ _id: id, level: level }, {
+            score,
             timer,
             level,
-        }, {new: true});
+            rounds,
+        }, { new: true });
     } catch (err) {
         console.log(err);
-      }
-      if (!updatedScore) {
+    }
+    if (!updatedScore) {
         return res.status(404).json({ message: "Unable To Update By this ID" });
-      }
-      return res.status(200).json({ updatedScore });
+    }
+    return res.status(200).json({ updatedScore });
 
 }
 const updateGameScore2 = async (req, res) => {
@@ -29,17 +30,17 @@ const updateGameScore2 = async (req, res) => {
     let updatedScore;
     try {
 
-        updatedScore = await GameScore.findOneAndUpdate({_id: id, level: level }, {
-            score, 
+        updatedScore = await GameScore.findOneAndUpdate({ _id: id, level: level }, {
+            score,
             timer,
-        }, {new: true});
+        }, { new: true });
     } catch (err) {
         console.log(err);
-      }
-      if (!updatedScore) {
+    }
+    if (!updatedScore) {
         return res.status(404).json({ message: "Unable To Update By this ID" });
-      }
-      return res.status(200).json({ updatedScore });
+    }
+    return res.status(200).json({ updatedScore });
 
 }
 
@@ -65,7 +66,7 @@ const getGameScore2 = async (req, res) => {
 
 const createGameScore = async (req, res) => {
 
-    const { userId, username,level, gamename, score, timer } = req.body
+    const { userId, username, level, gamename, score, timer, rounds } = req.body
     const gamescore = new GameScore({
         userId,
         username,
@@ -73,6 +74,7 @@ const createGameScore = async (req, res) => {
         score,
         level,
         timer,
+        rounds,
     });
     try {
         await gamescore.save();
@@ -145,7 +147,7 @@ const login = async (req, res, next) => {
 }
 const verifyToken = (req, res, next) => {
 
-    const headers= req.headers[`authorization`]
+    const headers = req.headers[`authorization`]
     const token = headers.split(" ")[1];
     console.log(headers)
     console.log("token")
