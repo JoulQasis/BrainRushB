@@ -24,7 +24,7 @@ const GameScore = new Schema({
         type: String,
     },
     level: {
-        type: Number,
+        type: String,
     },
     timer: {
         type: String,
