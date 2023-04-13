@@ -9,7 +9,7 @@ const app = express();
 const corsOptions = {
     origin: ['https://brain-rush-f-rgo4-mvin3k6y6-joulqasis.vercel.app', 'https://brain-rush-f-rgo4.vercel.app'],
     credentials: true,
-  };
+};
 
 app.use(cors(corsOptions));
 app.use(cookieParser());

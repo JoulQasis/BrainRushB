@@ -5,7 +5,7 @@ const GameScore = require('../model/GameScore.js')
 
 const updateGameScore = async (req, res) => {
     const id = req.params.id
-    const { score, timer, level, rounds } = req.body
+    const { score, timer, level, rounds, percentage } = req.body
     let updatedScore;
     try {
 
@@ -14,6 +14,7 @@ const updateGameScore = async (req, res) => {
             timer,
             level,
             rounds,
+            percentage,
         }, { new: true });
     } catch (err) {
         console.log(err);
@@ -26,13 +27,14 @@ const updateGameScore = async (req, res) => {
 }
 const updateGameScore2 = async (req, res) => {
     const id = req.params.id
-    const { score, timer, level } = req.body
+    const { score, timer, level, percentage } = req.body
     let updatedScore;
     try {
 
         updatedScore = await GameScore.findOneAndUpdate({ _id: id, level: level }, {
             score,
             timer,
+            percentage,
         }, { new: true });
     } catch (err) {
         console.log(err);
@@ -66,7 +68,7 @@ const getGameScore2 = async (req, res) => {
 
 const createGameScore = async (req, res) => {
 
-    const { userId, username, level, gamename, score, timer, rounds } = req.body
+    const { userId, username, level, gamename, score, timer, rounds, percentage } = req.body
     const gamescore = new GameScore({
         userId,
         username,
@@ -75,6 +77,7 @@ const createGameScore = async (req, res) => {
         level,
         timer,
         rounds,
+        percentage,
     });
     try {
         await gamescore.save();

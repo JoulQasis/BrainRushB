@@ -28,6 +28,9 @@ const GameScore = new Schema({
     },
     timer: {
         type: String,
+    },
+    percentage: {
+        type: String,
     }
 });
 
